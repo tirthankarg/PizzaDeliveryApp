@@ -11,38 +11,43 @@ import Order, { loader as orderLoader } from './features/order/Order';
 import AppLayout from './ui/AppLayout';
 import { action as updateOrderAction } from './features/order/UpdateOrder';
 
-const router = createBrowserRouter([
-  {
-    element: <AppLayout />,
-    errorElement: <Error />,
+const router = createBrowserRouter(
+  [
+    {
+      element: <AppLayout />,
+      errorElement: <Error />,
 
-    children: [
-      {
-        path: '/',
-        element: <Home />,
-      },
-      {
-        path: '/menu',
-        element: <Menu />,
-        loader: menuLoader,
-        errorElement: <Error />,
-      },
-      { path: '/cart', element: <Cart /> },
-      {
-        path: '/order/new',
-        element: <CreateOrder />,
-        action: createOrderAction,
-      },
-      {
-        path: '/order/:orderId',
-        element: <Order />,
-        loader: orderLoader,
-        errorElement: <Error />,
-        action: updateOrderAction,
-      },
-    ],
-  },
-]);
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/menu',
+          element: <Menu />,
+          loader: menuLoader,
+          errorElement: <Error />,
+        },
+        { path: '/cart', element: <Cart /> },
+        {
+          path: '/order/new',
+          element: <CreateOrder />,
+          action: createOrderAction,
+        },
+        {
+          path: '/order/:orderId',
+          element: <Order />,
+          loader: orderLoader,
+          errorElement: <Error />,
+          action: updateOrderAction,
+        },
+      ],
+    },
+  ],
+  {
+    basename: '/PizzaDeliveryApp',
+  }
+);
 
 function App() {
   return <RouterProvider router={router} />;
